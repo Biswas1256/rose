@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love Roses</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(to top,#ffdde1,#ee9ca7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:cursive;
+}
+
+.love-container{
+    position:relative;
+    text-align:center;
+}
+
+.love-img{
+    width:300px;
+    border-radius:20px;
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+.title{
+    color:white;
+    font-size:35px;
+    margin-bottom:15px;
+    text-shadow:0 0 10px hotpink;
+}
+
+/* Rose Container */
+.rose-container{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    pointer-events:none;
+}
+
+/* 🌹 Rose */
+.rose{
+    position:absolute;
+    width:30px;
+    height:30px;
+    animation:fly 5s linear forwards;
+}
+
+/* Petals */
+.petal{
+    position:absolute;
+    width:18px;
+    height:18px;
+    background:#ff1744;
+    border-radius:50%;
+}
+
+.p1{ top:0; left:6px; }
+.p2{ top:6px; left:0; }
+.p3{ top:6px; right:0; }
+.p4{ bottom:0; left:6px; }
+
+/* Center */
+.center{
+    position:absolute;
+    width:14px;
+    height:14px;
+    background:#b71c1c;
+    border-radius:50%;
+    top:8px;
+    left:8px;
+}
+
+/* Stem */
+.stem{
+    position:absolute;
+    width:3px;
+    height:25px;
+    background:green;
+    bottom:-22px;
+    left:14px;
+}
+
+/* Leaf */
+.leaf{
+    position:absolute;
+    width:12px;
+    height:8px;
+    background:green;
+    border-radius:50%;
+    bottom:-15px;
+    left:18px;
+    transform:rotate(30deg);
+}
+
+/* Animation */
+@keyframes fly{
+    0%{
+        transform:translateY(0);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="love-container">
+    <div class="title">Hover For Love 🌹</div>
+    <img src="images/r.jpg" class="love-img" id="loveImage">
+</div>
+
+<div class="rose-container" id="roseContainer"></div>
+
+<script>
+const img = document.getElementById("loveImage");
+const container = document.getElementById("roseContainer");
+
+function createRose(){
+
+    let rose = document.createElement("div");
+    rose.className="rose";
+
+    rose.style.left=Math.random()*100+"vw";
+
+    rose.innerHTML=`
+        <div class="petal p1"></div>
+        <div class="petal p2"></div>
+        <div class="petal p3"></div>
+        <div class="petal p4"></div>
+        <div class="center"></div>
+        <div class="stem"></div>
+        <div class="leaf"></div>
+    `;
+
+    container.appendChild(rose);
+
+    setTimeout(()=>rose.remove(),5000);
+}
+
+img.addEventListener("mouseenter",()=>{
+    for(let i=0;i<20;i++){
+        setTimeout(createRose,i*150);
+    }
+});
+</script>
+
+</body>
+</html>
